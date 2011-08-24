@@ -50,4 +50,15 @@ public class ImageIndexerController {
 		result.use(json()).withoutRoot().from(message).serialize();
 	}
 
+	@Path("/delImage")
+	public void delImage(String id) {
+		ReturnMessage message = null;
+		if (id != null) {
+			message = indexer.delImage(id);
+		} else {
+			message = ReturnMessage.PARAMETER_INVALID;
+		}
+		result.use(json()).withoutRoot().from(message).serialize();
+	}
+
 }

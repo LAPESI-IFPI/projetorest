@@ -35,6 +35,11 @@ public class TextIndexerController {
 	public TextIndexerController(Result result) {
 		this.result = result;
 	}
+	
+	@Path("/")
+	public void index() {
+		result.include("variable", "Projeto REST");
+	}
 
 	@Path("/addText")
 	public ReturnMessage addText(MetaDocument metaDocument, String content) {

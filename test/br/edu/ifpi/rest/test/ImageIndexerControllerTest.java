@@ -38,14 +38,65 @@ public class ImageIndexerControllerTest {
 
 		endereco = endereco.replace(" ", "+");
 		
-		System.out.println(endereco);
-
 		string = executar(endereco);
 		
 		ReturnMessage message = new Gson()
 				.fromJson(string, ReturnMessage.class);
 		System.out.println(message);
 		assertEquals(ReturnMessage.SUCCESS, message);
+	}
+	
+	@Test
+	public void deveriaDevolverDuplicatedIdQuandoTentoIndexarUmaImagemDuasVezes() {
+
+		String endereco = "http://localhost:8080/projetorest/addImage?";
+		String string = "";
+
+		endereco += "metaDocument.id=" + metadoc.getId()
+				+ "&metaDocument.author=" + metadoc.getAuthor()
+				+ "&metaDocument.title=" + metadoc.getTitle()
+				+ "&metaDocument.format=" + metadoc.getFormat()
+				+ "&metaDocument.keywords=" + metadoc.getKeywords()
+				+ "&metaDocument.publicationDate="
+				+ metadoc.getPublicationDate() + "&image=" + image;
+
+		endereco = endereco.replace(" ", "+");
+		
+		string = executar(endereco);
+		
+		ReturnMessage message = new Gson()
+				.fromJson(string, ReturnMessage.class);
+		System.out.println(message);
+		assertEquals(ReturnMessage.DUPLICATED_ID, message);
+	}
+	
+	
+	
+	@Test
+	public void deveriaDeletarUmaImagem(){
+
+		String endereco = "http://localhost:8080/projetorest/delImage?id="+metadoc.getId();
+		String string = "";
+		
+		string = executar(endereco);
+		
+		ReturnMessage message = new Gson()
+				.fromJson(string, ReturnMessage.class);
+		System.out.println(message);
+		assertEquals(ReturnMessage.SUCCESS, message);
+	}
+	
+	@Test
+	public void deveriaRetornarIdNotFoundQuandoTentarDeletarUmaImagemInexistente(){
+		String endereco = "http://localhost:8080/projetorest/delText?id=asdfjalsdfj";
+		String string = "";
+		
+		string = executar(endereco);
+		
+		ReturnMessage message = new Gson()
+				.fromJson(string, ReturnMessage.class);
+		System.out.println(message);
+		assertEquals(ReturnMessage.ID_NOT_FOUND, message);
 	}
 	
 	public String executar(String endereco){

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="projetorest" default="build" basedir=".">
+
+	<property name="conf.name" value="opala.conf" />
+
+	<target name="build">
+
+		<war warfile="projetorest.war" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="${basedir}">
+				<include name="**/*.jsp" />
+				<include name="**/*.html" />
+				<include name="${conf.name}" />
+			</fileset>
+		</war>
+	</target>
+</project>

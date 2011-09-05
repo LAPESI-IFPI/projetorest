@@ -69,7 +69,7 @@ public class TextSearcherControllerTest {
 	}
 
 	@Test
-	public final void deveriaRetornarEmptySearcherQuandoNaoEncontaNadaNaBusca()
+	public final void deveriaRetornarEmptySearcherQuandoNaoEncontrarNadaNaBusca()
 			throws Exception {
 		Map<String, String> fields = new HashMap<String, String>();
 		fields.put(Metadata.CONTENT.getValue(),

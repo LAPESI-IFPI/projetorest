@@ -2,13 +2,11 @@
 <project name="projetorest" default="build" basedir=".">
 
 	<property name="conf.name" value="opala.conf" />
-
+	
 	<target name="build">
-
-		<war warfile="projetorest.war" webxml="WebContent/WEB-INF/web.xml">
+		<echo> Gerando o .war do projeto...</echo>
+		<war warfile="projetorest.war" basedir="WebContent">
 			<fileset dir="${basedir}">
-				<include name="**/*.jsp" />
-				<include name="**/*.html" />
 				<include name="${conf.name}" />
 			</fileset>
 		</war>
